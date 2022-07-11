@@ -1,3 +1,4 @@
+import 'package:clone_tiki/constants/page_view_list.dart';
 import 'package:flutter/material.dart';
 
 class HomeStack extends StatefulWidget {
@@ -37,10 +38,13 @@ class _HomeStackState extends State<HomeStack> {
                           width: 45,
                           child: Column(
                             children: [
-                              Container(
+                              SizedBox(
                                 height: 45,
                                 width: 45,
-                                color: Colors.amber,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset('assets/icon.png'),
+                                ),
                               ),
                               const SizedBox(
                                 height: 10,
@@ -70,26 +74,26 @@ class _HomeStackState extends State<HomeStack> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 70,
                     width: 90,
-                    color: Colors.red,
+                    child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.asset(banners[0])),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     height: 100,
                     width: 150,
-                    color: Colors.red,
+                    child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.asset(banners[1])),
                   ),
                   const SizedBox(
                     width: 10,
                   ),
-                  Container(
+                  SizedBox(
                     height: 70,
                     width: 90,
-                    color: Colors.red,
+                    child: ClipRRect(borderRadius: BorderRadius.circular(15),child: Image.asset(banners[2])),
                   ),
                 ],
               )

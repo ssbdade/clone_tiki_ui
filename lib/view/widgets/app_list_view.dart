@@ -24,11 +24,11 @@ class _AppListViewState extends State<AppListView> {
           SizedBox(
             height: widget.titleHeight,
             child: Row(
-              children: [
+              children: const [
                 SizedBox(width: 20,),
-                const Text("Gia soc hom nay"),
+                Text("Gia soc hom nay"),
                 SizedBox(width: 200,),
-                const Text("Xem them"),
+                Text("Xem them"),
               ],
             )
           ),
@@ -42,10 +42,13 @@ class _AppListViewState extends State<AppListView> {
                     width: 80,
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           height: widget.listElementHeight,
                           width: widget.listElementWidth,
-                          color: Colors.amber,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.asset('assets/sp.jpg'),
+                          ),
                         ),
                         const SizedBox(
                           height: 10,

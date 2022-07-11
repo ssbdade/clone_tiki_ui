@@ -1,9 +1,9 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:clone_tiki/constants/page_view_list.dart';
 import 'package:clone_tiki/view/widgets/app_list_view.dart';
 import 'package:clone_tiki/view/widgets/home_stack.dart';
 import 'package:clone_tiki/view/widgets/page_view_with_dot.dart';
-import 'package:clone_tiki/view/widgets/pageview_gallery.dart';
+import 'package:clone_tiki/view/widgets/pageview_listview.dart';
+import 'package:clone_tiki/view/widgets/sliver_appbar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,60 +23,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.blue,
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              elevation: 0,
-              pinned: true,
-              expandedHeight: 100,
-              toolbarHeight: 50,
-              collapsedHeight: 50,
-              title:
-                  SizedBox(height: 25, child: Image.asset('assets/logo.png')),
-              centerTitle: true,
-              flexibleSpace: FlexibleSpaceBar(
-                title: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 220,
-                        height: 25,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(5.0),
-                        ),
-                        child: Row(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10.0),
-                              child: Icon(
-                                Icons.search_outlined,
-                                color: Colors.black38,
-                              ),
-                            ),
-                            Text(
-                              'Ban tim gi hom nay?',
-                              style: TextStyle(
-                                color: Colors.black38,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                centerTitle: true,
-              ),
-              actions: const [
-                Icon(Icons.notifications_none_outlined),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Icon(Icons.shopping_cart_outlined),
-                ),
-              ],
-            ),
+            const SliverAppbar(),
             SliverList(
               delegate: SliverChildListDelegate([
                 IntrinsicHeight(
@@ -135,16 +82,46 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey,
                 ),
                 Container(
+                  height: 400,
                   color: Colors.white,
-                    child: CarouselSlider.builder(itemCount: 4, itemBuilder: (context, index, realIdx) {
-                      final urlImage = imgList[index];
-                      return buildImage(urlImage, index);
-                    }, options: CarouselOptions(
-                      height: 400,
-                      autoPlay: true,
-                      enlargeCenterPage: true,
-                    )),
-                )]),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                          height: 30,
+                          child: Row(
+                            children: const [
+                              SizedBox(width: 10,),
+                              Text("Thuong hieu chinh hang",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              SizedBox(width: 135,),
+                              Text("XEM THEM"),
+                            ],
+                          )
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      PageViewBorder(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        height: 200,
+                        width: 125,
+                      )
+                    ],
+
+                  ),
+                )
+               ]
+              ),
             ),
           ],
         ));
@@ -152,16 +129,4 @@ class _HomePageState extends State<HomePage> {
 }
 
 
-Widget buildImage(String urlImage, int index) {
-  return Container(
-    color: Colors.grey,
-    child: Center(
-      child: Image.network(
-        urlImage,
-        fit: BoxFit.cover,
-        width: 1000,
-      ),
-    ),
-  );
-}
 
