@@ -1,3 +1,4 @@
+import 'package:clone_tiki/constants/dimension.dart';
 import 'package:flutter/material.dart';
 
 class AppListView extends StatefulWidget {
@@ -23,13 +24,15 @@ class _AppListViewState extends State<AppListView> {
         children: [
           SizedBox(
             height: widget.titleHeight,
-            child: Row(
-              children: const [
-                SizedBox(width: 20,),
-                Text("Gia soc hom nay"),
-                SizedBox(width: 200,),
-                Text("Xem them"),
-              ],
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: width(context, 15)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text("Gia soc hom nay"),
+                  Text("Xem them"),
+                ],
+              ),
             )
           ),
           SizedBox(

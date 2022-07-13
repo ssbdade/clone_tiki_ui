@@ -6,6 +6,8 @@ import 'package:clone_tiki/view/widgets/pageview_listview.dart';
 import 'package:clone_tiki/view/widgets/sliver_appbar.dart';
 import 'package:flutter/material.dart';
 
+import '../constants/dimension.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,13 +19,21 @@ class _HomePageState extends State<HomePage> {
   final pageViewController = PageController();
   double currentIndex = 0;
 
+
+  @override
+  initState() {
+    super.initState();
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.blue,
         body: CustomScrollView(
           slivers: [
-            const SliverAppbar(),
+            const SliverSearchBar(),
             SliverList(
               delegate: SliverChildListDelegate([
                 IntrinsicHeight(
@@ -31,13 +41,9 @@ class _HomePageState extends State<HomePage> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const SizedBox(
-                        width: 10,
-                        height: 40,
-                      ),
                       SizedBox(
-                        height: 40,
-                        width: 320,
+                        height: height(context, 40),
+                        width: width(context, 370),
                         child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: 10,
@@ -48,78 +54,106 @@ class _HomePageState extends State<HomePage> {
                               );
                             }),
                       ),
-                      const VerticalDivider(
+                      VerticalDivider(
                         color: Colors.black,
-                        width: 10,
+                        width: width(context, 10),
                         thickness: 1,
                       ),
                       const Icon(Icons.menu_sharp)
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: height(context, 10),
                 ),
-                PageViewWithDot(list: list1, initialPage: 20, pageHeight: 125),
-                const SizedBox(
-                  height: 10,
+                PageViewWithDot(list: list1, initialPage: 20, pageHeight: height(context, 125)),
+                SizedBox(
+                  height: height(context, 10),
                 ),
                 PageViewWithDot(
                     list: list2,
                     initialPage: list2.length * 10,
-                    pageHeight: 225),
-                const SizedBox(
-                  height: 10,
+                    pageHeight: height(context, 225)),
+                SizedBox(
+                  height: height(context, 10),
                 ),
                 const HomeStack(),
                 Container(
-                  height: 10,
+                  height: height(context, 10),
                   color: Colors.grey,
                 ),
                 const AppListView(),
                 Container(
-                  height: 10,
+                  height: height(context, 10),
                   color: Colors.grey,
                 ),
                 Container(
-                  height: 400,
+                  height: height(context, 350),
                   color: Colors.white,
                   child: Column(
                     children: [
                       SizedBox(
-                          height: 30,
-                          child: Row(
-                            children: const [
-                              SizedBox(width: 10,),
-                              Text("Thuong hieu chinh hang",
-                                style: TextStyle(
-                                  fontSize: 18,
+                          height: height(context, 40),
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: width(context, 10), vertical: height(context, 10)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: const [
+                                Text("Thuong hieu chinh hang",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                  ),
                                 ),
-                              ),
-                              SizedBox(width: 135,),
-                              Text("XEM THEM"),
-                            ],
+                                Text("XEM THEM"),
+                              ],
+                            ),
                           )
                       ),
+                      const PageViewBorder(),
                       SizedBox(
-                        height: 10,
+                        height: height(context, 10),
                       ),
-                      PageViewBorder(),
                       SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
                         height: 200,
-                        width: 125,
+                        width: getWidth(context),
+                        child: ListView.builder(itemBuilder: (context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.fromLTRB(width(context, 10), 0, 0, 0),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      width: 2,
+                                      color: const Color(0xfff3f4f6),
+                                    ),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: Image.asset("assets/brand.webp",
+                                  ),
+                                ),
+                              ),
+                                const Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Text("Giam 300k"),
+                                )
+                            ]),
+                          );
+                        },
+                          itemCount: 10,
+                          scrollDirection: Axis.horizontal,
+                        ),
                       )
                     ],
 
                   ),
-                )
+                ),
+                Container(
+                  height: height(context, 10),
+                  color: Colors.grey,
+                ),
                ]
               ),
             ),

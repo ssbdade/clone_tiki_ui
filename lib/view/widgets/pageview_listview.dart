@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../constants/dimension.dart';
 import '../../constants/page_view_list.dart';
 
 class PageViewBorder extends StatefulWidget {
@@ -20,14 +21,14 @@ class _PageViewBorderState extends State<PageViewBorder> {
           builder: (context) {
             return CarouselSlider.builder(itemCount: 4, itemBuilder: (context, index, realIdx) {
               final urlImage = imgList[index];
-              return buildImage(urlImage, index, currentPage);
+              return buildImage(urlImage, index, currentPage, width(context, 800));
             }, options: CarouselOptions(
               onPageChanged:  (index, reason) {
                 setState(() {
                   currentPage = index;
                 });
               },
-              height: 125,
+              height: height(context, 125),
               autoPlay: true,
               viewportFraction: 0.85,
             ));
@@ -37,7 +38,7 @@ class _PageViewBorderState extends State<PageViewBorder> {
   }
 }
 
-Widget buildImage(String urlImage, int index, currentPage) {
+Widget buildImage(String urlImage, int index, currentPage, width) {
   return AnimatedContainer(
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(16),
@@ -51,7 +52,7 @@ Widget buildImage(String urlImage, int index, currentPage) {
         child: Image.network(
           urlImage,
           fit: BoxFit.fill,
-          width: 800,
+          width: width,
         ),
       ),
     ),
