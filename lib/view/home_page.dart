@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey,
                 ),
                 Container(
-                  height: height(context, 350),
+                  height: height(context, 375),
                   color: Colors.white,
                   child: Column(
                     children: [
@@ -114,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                         height: height(context, 10),
                       ),
                       SizedBox(
-                        height: 200,
+                        height: height(context, 200),
                         width: getWidth(context),
                         child: ListView.builder(itemBuilder: (context, int index) {
                           return Padding(
@@ -122,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                             child: Stack(
                               children: [
                                 Container(
+                                  width: width(context, 150),
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       width: 2,
@@ -132,13 +133,24 @@ class _HomePageState extends State<HomePage> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: Image.asset("assets/brand.webp",
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
                               ),
-                                const Align(
-                                  alignment: Alignment.bottomCenter,
-                                  child: Text("Giam 300k"),
-                                )
+                                 SizedBox(
+                                   width: width(context, 150),
+                                   child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Padding(
+                                        padding: EdgeInsets.symmetric(vertical: height(context, 5)),
+                                        child: const Text("Giam 300k",
+                                          style: TextStyle(
+                                            color: Colors.blue,
+                                          ),
+                                        ),
+                                    ),
+                                ),
+                                 )
                             ]),
                           );
                         },
@@ -157,6 +169,39 @@ class _HomePageState extends State<HomePage> {
                ]
               ),
             ),
+            SliverAppBar(
+              backgroundColor: Colors.grey,
+              stretch: false,
+              pinned: true,
+              actions: [
+                Container(
+                color: Colors.red,
+                height: 300,
+                width: getWidth(context),
+                child: ListView.builder(
+                    itemCount: 20,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, int index)
+                    {
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Container(
+                          height: 300,
+                          width: 100,
+                          color: Colors.black,
+                        ),
+                      );
+                    }),
+              ),
+              ]
+            ),
+            SliverList(delegate: SliverChildListDelegate(
+              [
+                Container(
+                  height: 800,
+                ),
+              ]
+            ))
           ],
         ));
   }
