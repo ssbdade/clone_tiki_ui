@@ -1,18 +1,20 @@
+import 'package:clone_tiki/view/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 import '../../constants/page_view_list.dart';
 
 class BodyListView extends StatefulWidget {
-  BodyListView({Key? key, required this.currentIndex}) : super(key: key);
-  int currentIndex;
+  const BodyListView({Key? key}) : super(key: key);
+
 
   @override
   State<BodyListView> createState() => _BodyListViewState();
 }
 
 class _BodyListViewState extends State<BodyListView> {
-
+  final Controller c = Get.find();
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -33,7 +35,7 @@ class _BodyListViewState extends State<BodyListView> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        Image.asset(listViewImage[widget.currentIndex][0]),
+                        Obx(() => Image.asset(listViewImage[c.currentIndex.value][0])),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10.0),
                           child: Text("Công tắc cơ bật tắt đèn tự động",
@@ -64,7 +66,7 @@ class _BodyListViewState extends State<BodyListView> {
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        Image.asset(listViewImage[widget.currentIndex][0]),
+                        Obx(() => Image.asset(listViewImage[c.currentIndex.value][0])),
                         const Padding(
                           padding: EdgeInsets.symmetric(vertical: 10.0),
                           child: Text("Công tắc cơ bật tắt đèn tự động",
@@ -88,3 +90,5 @@ class _BodyListViewState extends State<BodyListView> {
     );
   }
 }
+
+

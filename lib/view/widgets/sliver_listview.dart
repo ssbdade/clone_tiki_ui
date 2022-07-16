@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../constants/dimension.dart';
 import '../../constants/page_view_list.dart';
+import '../home_page.dart';
 
 class SliverListview extends StatefulWidget {
-  SliverListview({Key? key, required this.currentIndex}) : super(key: key);
+  const SliverListview({Key? key}) : super(key: key);
 
-  int currentIndex;
 
   @override
   State<SliverListview> createState() => _SliverListviewState();
 }
 
 class _SliverListviewState extends State<SliverListview> {
+
+  final Controller c = Get.find();
 
   @override
   initState() {
@@ -39,16 +41,15 @@ class _SliverListviewState extends State<SliverListview> {
                   {
                     return Padding(
                       padding: const EdgeInsets.all(3.0),
-                      child: InkWell(
+                      child: Obx(() => InkWell(
                         onTap: () {
-                          widget.currentIndex = index;
-                          print(1);
+                          c.changeValue(index);
                         },
                         child: Container(
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(5),
-                              border: widget.currentIndex == index ? Border.all(
+                              border: c.currentIndex.value == index ? Border.all(
                                 width:  1,
                                 color: Colors.blue,
                               ) : const Border()
@@ -68,14 +69,14 @@ class _SliverListviewState extends State<SliverListview> {
                               Expanded(child: Text(images[index][1], textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 12,
-                                  color: widget.currentIndex == index ? Colors.blue : Colors.black,
+                                  color: c.currentIndex.value == index ? Colors.blue : Colors.black,
                                 ),
                               )),
                             ],
                           ),
                         ),
                       ),
-                    );
+                    ));
                   }),
             ),
     );

@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    var currentIndex = 0.obs;
+    final Controller c = Get.put(Controller());
     return Scaffold(
         backgroundColor: Colors.blue,
         body: NestedScrollView(
@@ -193,9 +193,14 @@ class _HomePageState extends State<HomePage> {
                 ),
               ]),
             ),
-                Obx(() => SliverListview(currentIndex: currentIndex.value,)),
+                const SliverListview(),
           ],
-          body: Obx(() => BodyListView(currentIndex: currentIndex.value,))
+          body: const BodyListView(),
         ));
   }
+}
+
+class Controller extends GetxController{
+  var currentIndex = 0.obs;
+  changeValue(int a) => currentIndex.value = a;
 }
