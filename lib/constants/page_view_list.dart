@@ -21,3 +21,23 @@ List<String> banners = [
   'assets/banner3.webp',
   'assets/banner2.webp',
 ];
+
+
+List<List> images = [
+  ["assets/danhchoban.webp", "Dành Cho Bạn"],
+  ["assets/flash_voucher.webp", "Flash Voucher"],
+  ["assets/ngon.webp", "Đi Chợ Siêu Sale"],
+  ["assets/dealhot.webp", "Deal Siêu Hot"],
+  ["assets/revodoi.webp", "Rẻ Vô Đối"],
+  ["assets/new.webp", 'Hàng Mới'],
+];
+
+
+List<List> listViewImage = [
+  ["assets/congtac.webp"],
+  ["assets/dieukhien.webp"],
+  ["assets/got.webp"],
+  ["assets/tuongot.webp"],
+  ["assets/caogot.jpg"],
+  ["assets/ao.webp"],
+];

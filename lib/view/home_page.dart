@@ -1,10 +1,13 @@
 import 'package:clone_tiki/constants/page_view_list.dart';
 import 'package:clone_tiki/view/widgets/app_list_view.dart';
+import 'package:clone_tiki/view/widgets/body_list_view.dart';
 import 'package:clone_tiki/view/widgets/home_stack.dart';
 import 'package:clone_tiki/view/widgets/page_view_with_dot.dart';
 import 'package:clone_tiki/view/widgets/pageview_listview.dart';
 import 'package:clone_tiki/view/widgets/sliver_appbar.dart';
+import 'package:clone_tiki/view/widgets/sliver_listview.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constants/dimension.dart';
 
@@ -17,22 +20,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final pageViewController = PageController();
-  double currentIndex = 0;
 
 
   @override
   initState() {
     super.initState();
-
   }
-
 
   @override
   Widget build(BuildContext context) {
+
+    var currentIndex = 0.obs;
     return Scaffold(
         backgroundColor: Colors.blue,
-        body: CustomScrollView(
-          slivers: [
+        body: NestedScrollView(
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) => [
             const SliverSearchBar(),
             SliverList(
               delegate: SliverChildListDelegate([
@@ -66,7 +69,10 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(
                   height: height(context, 10),
                 ),
-                PageViewWithDot(list: list1, initialPage: 20, pageHeight: height(context, 125)),
+                PageViewWithDot(
+                    list: list1,
+                    initialPage: 20,
+                    pageHeight: height(context, 125)),
                 SizedBox(
                   height: height(context, 10),
                 ),
@@ -88,18 +94,21 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey,
                 ),
                 Container(
-                  height: height(context, 375),
+                  height: height(context, 380),
                   color: Colors.white,
                   child: Column(
                     children: [
                       SizedBox(
                           height: height(context, 40),
                           child: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: width(context, 10), vertical: height(context, 10)),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: width(context, 10),
+                                vertical: height(context, 10)),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: const [
-                                Text("Thuong hieu chinh hang",
+                                Text(
+                                  "Thuong hieu chinh hang",
                                   style: TextStyle(
                                     fontSize: 18,
                                   ),
@@ -107,8 +116,7 @@ class _HomePageState extends State<HomePage> {
                                 Text("XEM THEM"),
                               ],
                             ),
-                          )
-                      ),
+                          )),
                       const PageViewBorder(),
                       SizedBox(
                         height: height(context, 10),
@@ -116,11 +124,12 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: height(context, 200),
                         width: getWidth(context),
-                        child: ListView.builder(itemBuilder: (context, int index) {
-                          return Padding(
-                            padding: EdgeInsets.fromLTRB(width(context, 10), 0, 0, 0),
-                            child: Stack(
-                              children: [
+                        child: ListView.builder(
+                          itemBuilder: (context, int index) {
+                            return Padding(
+                              padding: EdgeInsets.fromLTRB(width(context, 10),
+                                  0, 0, height(context, 20)),
+                              child: Stack(children: [
                                 Container(
                                   width: width(context, 150),
                                   decoration: BoxDecoration(
@@ -130,82 +139,63 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Image.asset("assets/brand.webp",
-                                    fit: BoxFit.cover,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15),
+                                    child: Image.asset(
+                                      "assets/brand.webp",
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
-                              ),
-                                 SizedBox(
-                                   width: width(context, 150),
-                                   child: Align(
+                                SizedBox(
+                                  width: width(context, 150),
+                                  child: Align(
                                     alignment: Alignment.bottomCenter,
                                     child: Padding(
-                                        padding: EdgeInsets.symmetric(vertical: height(context, 5)),
-                                        child: const Text("Giam 300k",
-                                          style: TextStyle(
-                                            color: Colors.blue,
-                                          ),
+                                      padding: EdgeInsets.symmetric(
+                                          vertical: height(context, 5)),
+                                      child: const Text(
+                                        "Giam 300k",
+                                        style: TextStyle(
+                                          color: Colors.blue,
                                         ),
+                                      ),
                                     ),
-                                ),
-                                 )
-                            ]),
-                          );
-                        },
+                                  ),
+                                )
+                              ]),
+                            );
+                          },
                           itemCount: 10,
                           scrollDirection: Axis.horizontal,
                         ),
                       )
                     ],
-
                   ),
                 ),
                 Container(
                   height: height(context, 10),
                   color: Colors.grey,
                 ),
-               ]
-              ),
-            ),
-            SliverAppBar(
-              backgroundColor: Colors.grey,
-              stretch: false,
-              pinned: true,
-              actions: [
                 Container(
-                color: Colors.red,
-                height: 300,
-                width: getWidth(context),
-                child: ListView.builder(
-                    itemCount: 20,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, int index)
-                    {
-                      return Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          height: 300,
-                          width: 100,
-                          color: Colors.black,
-                        ),
-                      );
-                    }),
-              ),
-              ]
-            ),
-            SliverList(delegate: SliverChildListDelegate(
-              [
-                Container(
-                  height: 800,
+                  color: Colors.white,
+                  height: height(context, 50),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 10),
+                    child: Text(
+                      "Gợi ý hôm nay",
+                      style: TextStyle(
+                        fontSize: fontSize(context, 20),
+                      ),
+                    ),
+                  ),
                 ),
-              ]
-            ))
+              ]),
+            ),
+                Obx(() => SliverListview(currentIndex: currentIndex.value,)),
           ],
+          body: Obx(() => BodyListView(currentIndex: currentIndex.value,))
         ));
   }
 }
-
-
-
